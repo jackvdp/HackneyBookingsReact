@@ -1,8 +1,7 @@
 import Accordion from "./components/Accordion"
 import Header from "./components/Header"
 import axios from "axios"
-import React, { useState, useEffect } from 'react';
-import cors from "cors"
+import React, { useState, useEffect } from 'react'
 
 function App() {
 
@@ -15,8 +14,7 @@ function App() {
     .catch(err => {
       console.log(err)
     })
-    // Update the document title using the browser API
-  }, []);
+  });
   
   return (
     <>
