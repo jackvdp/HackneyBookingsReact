@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react"
 import { Accordion } from "lbh-frontend"
 
-const MyAccordion = () => {
+const MyAccordion = (props) => {
   const ref = useRef(null)
 
   useEffect(() => {
@@ -15,6 +15,7 @@ const MyAccordion = () => {
       data-attribute="value"
       ref={ref}
     >
+      <p>{props.children}</p>
       <div className="govuk-accordion__section ">
         <div className="govuk-accordion__section-header">
           <h5 className="govuk-accordion__section-heading">

@@ -5,11 +5,14 @@ import React, { useState, useEffect } from 'react'
 
 function App() {
 
-  const [apiData, setapiData] = useState("")
+  const [firstName, setFirstName] = useState("")
+  
   useEffect(() => {
     axios.get("https://hackney-bookings-api.herokuapp.com/booking")
     .then(response_from_api => {
       console.log(response_from_api)
+      console.log(response_from_api.data[0].firstName)
+      setFirstName(response_from_api.data[0].firstName)
     })
     .catch(err => {
       console.log(err)
@@ -19,7 +22,9 @@ function App() {
   return (
     <>
     <Header />
-    <Accordion />
+    <Accordion>
+      {firstName}
+    </Accordion>
     </>
   )
 }
