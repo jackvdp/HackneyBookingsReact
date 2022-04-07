@@ -1,13 +1,13 @@
 
 function Header() {
     return (
-        <header class="lbh-header ">
-            <div class="lbh-header__main">
-                <div class="lbh-container lbh-header__wrapper">
-                    <h1 class="lbh-header__title">
-                        <a href="/" class="lbh-header__title-link">
+        <header className="lbh-header ">
+            <div className="lbh-header__main">
+                <div className="lbh-container lbh-header__wrapper">
+                    <h1 className="lbh-header__title">
+                        <a href="/" className="lbh-header__title-link">
                             <svg
-                                class="lbh-header__logo"
+                                className="lbh-header__logo"
                                 role="presentation"
                                 focusable="false"
                                 width="208px"
@@ -46,12 +46,12 @@ function Header() {
                                 <image
                                     src="/assets/images/lbh-logo.png"
                                     xlinkHref=""
-                                    class="lbh-header__logo-fallback-image"
+                                    className="lbh-header__logo-fallback-image"
                                     width="206"
                                     height="37"
                                 ></image>
                             </svg>
-                            <span class="lbh-header__logo-text"> Hackney </span>
+                            <span className="lbh-header__logo-text"> Hackney </span>
                         </a>
                     </h1>
                 </div>
