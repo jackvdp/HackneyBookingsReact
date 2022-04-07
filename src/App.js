@@ -1,5 +1,6 @@
 import Accordion from "./components/Accordion"
 import Header from "./components/Header"
+import Home from "./components/Home"
 import axios from "axios"
 import React, { useState, useEffect } from 'react'
 
@@ -22,7 +23,7 @@ function App() {
   return (
     <>
     <Header />
-    {/* <Home /> */}
+    <Home />
     <Accordion>
       {name}
     </Accordion>
