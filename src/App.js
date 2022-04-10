@@ -1,17 +1,16 @@
 import Accordion from "./components/Accordion"
-import Header from "./components/Header"
 import Home from "./components/Home"
 import Main from "./components/Main"
+import BookingButton from "./components/BookingButton"
+import AmendButton from "./components/AmendButton"
 
 function App() {
   return (
     <>
-      <Header />
       <Main>
         <Home />
-        <Accordion>
-          {/* {name} */}
-        </Accordion>
+        <BookingButton />
+        <AmendButton />
       </Main>
     </>
   )

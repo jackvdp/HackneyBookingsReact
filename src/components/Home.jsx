@@ -21,10 +21,11 @@ export default function Home() {
       <header className='App-header'>
         <h1 className='App-title'>Book Hackney Facilities and Services</h1>
       </header>
+      <h4>Welcome to the Hackney Council booking page. The current categories available for booking are as follows:</h4>
       {category.map(c => (
         <div key={c.categoryId}>
           <div>
-            <p>{c.name}</p>
+            <h4><li>{c.name}</li></h4>
           </div>
         </div>
       ))}
