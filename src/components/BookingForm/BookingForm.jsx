@@ -1,4 +1,4 @@
-function MyForm() {
+function BookingForm() {
   return (
     <div class="govuk-form-group lbh-form-group">
       {/* First Name */}
@@ -48,4 +48,4 @@ function MyForm() {
   )
 }
 
-export default MyForm
+export default BookingForm

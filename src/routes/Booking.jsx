@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import MyForm from "../components/MyForm/MyForm";
+import BookingForm from "../components/BookingForm/BookingForm";
 
 export default function Booking() {
     const [startDate, setStartDate] = useState(new Date());
@@ -33,7 +33,7 @@ export default function Booking() {
         <div class="govuk-select lbh-select">
           <DatePicker selected={startDate} onChange={(date:Date) => setStartDate(date)} />
         </div>
-        <MyForm />
+        <BookingForm />
         <button class="govuk-button lbh-button" data-module="govuk-button">
   Save and continue
 </button>
