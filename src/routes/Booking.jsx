@@ -11,8 +11,6 @@ export default function Booking() {
         <h2>Create a Booking</h2>
         <h5>The spaces available:
         <br></br>
-
-
         <ul>
         <li><a href="https://www.hackney.gov.uk/hackney-marshes">Hackney Marshes</a></li>
         <li><a href="https://www.hackney.gov.uk/mabley-green">Mabley Green</a>&nbsp;– 3G pitch</li>
