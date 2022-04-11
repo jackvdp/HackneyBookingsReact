@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
-
 import "react-datepicker/dist/react-datepicker.css";
+import MyForm from "../components/MyForm/MyForm";
 
 export default function Booking() {
     const [startDate, setStartDate] = useState(new Date());
@@ -19,7 +19,7 @@ export default function Booking() {
         </h5>
         <div class="govuk-form-group lbh-form-group">
           <label class="govuk-label lbh-label" for="select-1">
-              Select a pitch
+              Please select a pitch:
             </label>
             <select class="govuk-select lbh-select" id="select-1" name="select-1">
               <option value="1">Hackney Marshes</option>
@@ -33,6 +33,7 @@ export default function Booking() {
         <div class="govuk-select lbh-select">
           <DatePicker selected={startDate} onChange={(date:Date) => setStartDate(date)} />
         </div>
+        <MyForm />
         <button class="govuk-button lbh-button" data-module="govuk-button">
   Save and continue
 </button>
