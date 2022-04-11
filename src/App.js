@@ -11,7 +11,7 @@ function App() {
       <Main>
         <Home />
         <Link to="/booking"><BookingButton /></Link>
-        <AmendButton />
+        <Link to="/amend"><AmendButton /></Link>
       </Main>
     </>
   )

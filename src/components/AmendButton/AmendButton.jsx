@@ -1,15 +1,8 @@
-import { Link } from "react-router-dom";
-
 function AmendButton() {
   return (
-    <Link to="/amend"
-    role="button"
-    draggable="false"
-    class="govuk-button lbh-button"
-    data-module="govuk-button"
-  >
-    Amend a Booking
-  </Link>
+    <button class="govuk-button lbh-button" data-module="govuk-button" style = {{ marginRight: '3rem' }}>
+      Amend a Booking
+    </button>
   )
 }
 
