@@ -1,91 +1,67 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SubmitButton from '../SubmitButton/SubmitButton';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import BookingFormLabel from './BookingFormLabel';
+import BookingFormPicker from './BookingFormPicker';
+import BookingFormInput from './BookingFormInput';
+import axios from "axios";
 
 export default function BookingForm() {
+  const [categories, setCategories] = useState([]);
+  const [locations, setLocations] = useState([]);
   const [startDate, setStartDate] = useState(new Date());
-
-  const [submit, setSubmit] = useState("")
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setSubmit("Form has been successfully submitted.")
     console.log(event.target.fname.value)
-    console.log(event.target.lname.value)
-    console.log(event.target.email.value)
   }
+
+  useEffect(() => {
+    axios.get("https://hackney-bookings-api.herokuapp.com/categories")
+      .then(res => {
+        setCategories(res.data)
+        const id = res.data[0].categoryId
+        axios.get("https://hackney-bookings-api.herokuapp.com/locations?id=" + id)
+          .then(res => {
+            setLocations(res.data)
+          })
+          .catch(err => {
+            console.log(err)
+          })
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }, []);
 
   return (
     <div class="govuk-form-group lbh-form-group">
-      <label class="govuk-label lbh-label" for="select-1">
-        Please select a category:
-      </label>
-      <select class="govuk-select lbh-select" id="select-1" name="select-1">
-        <option value="1">Hackney Marshes</option>
-        <option value="2">Mabley Green - 3G Pitch</option>
-        <option value="3">Haggerston Park</option>
-      </select>
-      <label class="govuk-label lbh-label" for="select-1">
-        Please select a pitch:
-      </label>
-      <select class="govuk-select lbh-select" id="select-1" name="select-1">
-        <option value="1">Hackney Marshes</option>
-        <option value="2">Mabley Green - 3G Pitch</option>
-        <option value="3">Haggerston Park</option>
-      </select>
-      <label class="govuk-label lbh-label" for="select-1">
-        Select a date
-      </label>
+      <BookingFormLabel>Please select a category:</BookingFormLabel>
+      <BookingFormPicker options={categories} />
+      <BookingFormLabel>Please select a pitch:</BookingFormLabel>
+      <BookingFormPicker options={locations} />
+      <BookingFormLabel>Select a date:</BookingFormLabel>
       <div class="govuk-select lbh-select">
         <DatePicker selected={startDate} onChange={(date: Date) => setStartDate(date)} />
       </div>
       <form onSubmit={handleSubmit} data-testid="booking-form">
         {/* First Name */}
-        <label class="govuk-label lbh-label" for="input-example">
-          Enter your first name:
-        </label>
-        <input
-          class="govuk-input lbh-input"
-          id="input-example"
-          name="fname"
-          type="text"
-        />
+        <BookingFormLabel>Enter your first name:</BookingFormLabel>
+        <BookingFormInput name="fname" />
         {/* Last Name */}
-        <label class="govuk-label lbh-label" for="input-example">
-          Enter your last name:
-        </label>
-        <input
-          class="govuk-input lbh-input"
-          id="input-example"
-          name="lname"
-          type="text"
-        />
+        <BookingFormLabel>Enter your last name:</BookingFormLabel>
+        <BookingFormInput name="lname" />
         {/* Email */}
-        <label class="govuk-label lbh-label" for="input-example">
-          Enter your email:
-        </label>
-        <input
-          class="govuk-input lbh-input"
-          id="input-example"
-          name="email"
-          type="text"
-        />
+        <BookingFormLabel>Enter your email:</BookingFormLabel>
+        <BookingFormInput name="email" />
         {/* Special requirements */}
-        <label class="govuk-label lbh-label" for="input-example">
-          Enter any special requirements:
-        </label>
+        <BookingFormLabel>Enter any special requirements:</BookingFormLabel>
         <span id="input-with-hint-text-hint" class="govuk-hint lbh-hint">
           For e.g., any assistance you may require
         </span>
-        <input
-          class="govuk-input lbh-input"
-          id="input-example"
-          name="special-req"
-          type="text"
-        />
+        <BookingFormInput name="specreq" />
         <SubmitButton />
-        <h4>{submit}</h4>
       </form>
     </div>
   )
