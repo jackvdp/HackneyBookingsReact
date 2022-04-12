@@ -65,7 +65,6 @@ export default function BookingForm() {
 
   function handleCategoryChange(category) {
     const id = category.categoryId
-    console.log("*********")
     getLocations(id)
   }
 

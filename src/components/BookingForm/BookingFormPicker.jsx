@@ -5,11 +5,7 @@ export default function BookingFormPicker(props) {
 
   function handleChange(event) {
     const value = event.target.value
-    console.log("*********")
-    console.log(value);
-
     const category = options.filter(cat => cat.name == value)[0]
-    console.log(category);
     onChange(category)
   }
 
