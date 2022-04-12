@@ -1,6 +1,21 @@
-function BookingForm() {
+import React, { useState } from 'react';
+import SubmitButton from '../SubmitButton/SubmitButton';
+
+export default function BookingForm() {
+  const [submit, setSubmit] = useState("")
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setSubmit("Form has been successfully submitted.")
+    console.log(event.target[0].value)
+    console.log(event.target.fname.value)
+    console.log(event.target.lname.value)
+    console.log(event.target.email.value)
+  }
+
   return (
     <div class="govuk-form-group lbh-form-group">
+    <form onSubmit={handleSubmit} data-testid="booking-form">
       {/* First Name */}
       <label class="govuk-label lbh-label" for="input-example">
         Enter your first name:
@@ -8,7 +23,7 @@ function BookingForm() {
       <input
         class="govuk-input lbh-input"
         id="input-example"
-        name="test-name"
+        name="fname"
         type="text"
       />
       {/* Last Name */}
@@ -18,7 +33,7 @@ function BookingForm() {
       <input
         class="govuk-input lbh-input"
         id="input-example"
-        name="test-name"
+        name="lname"
         type="text"
       />
       {/* Email */}
@@ -28,7 +43,7 @@ function BookingForm() {
       <input
         class="govuk-input lbh-input"
         id="input-example"
-        name="test-name"
+        name="email"
         type="text"
       />
       {/* Special requirements */}
@@ -41,11 +56,12 @@ function BookingForm() {
       <input
         class="govuk-input lbh-input"
         id="input-example"
-        name="test-name"
+        name="special-req"
         type="text"
       />
+      <SubmitButton />
+      <h4>{submit}</h4>
+      </form>
     </div>
   )
 }
-
-export default BookingForm

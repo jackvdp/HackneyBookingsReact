@@ -1,9 +1,9 @@
-function BookingButton() {
+function SubmitButton() {
   return (
     <button class="govuk-button lbh-button" data-module="govuk-button" style = {{ marginRight: '3rem' }}>
-      Create a Booking
+      Submit
     </button>
   )
 }
 
-export default BookingButton
+export default SubmitButton
