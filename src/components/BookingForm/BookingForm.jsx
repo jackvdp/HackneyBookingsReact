@@ -18,27 +18,13 @@ export default function BookingForm() {
   }
 
   useEffect(() => {
-    axios.get("https://hackney-bookings-api.herokuapp.com/categories")
-      .then(res => {
-        setCategories(res.data)
-        const id = res.data[0].categoryId
-        axios.get("https://hackney-bookings-api.herokuapp.com/locations?id=" + id)
-          .then(res => {
-            setLocations(res.data)
-          })
-          .catch(err => {
-            console.log(err)
-          })
-      })
-      .catch(err => {
-        console.log(err)
-      })
+    getCategories()
   }, []);
-
+  
   return (
     <div class="govuk-form-group lbh-form-group">
       <BookingFormLabel>Please select a category:</BookingFormLabel>
-      <BookingFormPicker options={categories} />
+      <BookingFormPicker options={categories} onChange={handleCategoryChange} />
       <BookingFormLabel>Please select a pitch:</BookingFormLabel>
       <BookingFormPicker options={locations} />
       <BookingFormLabel>Select a date:</BookingFormLabel>
@@ -65,4 +51,32 @@ export default function BookingForm() {
       </form>
     </div>
   )
+
+  function getCategories(){
+    axios.get("https://hackney-bookings-api.herokuapp.com/categories")
+      .then(res => {
+        setCategories(res.data)
+        getLocations(res.data[0].categoryId)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
+  function handleCategoryChange(category) {
+    const id = category.categoryId
+    console.log("*********")
+    getLocations(id)
+  }
+
+  function getLocations(id) {
+    axios.get("https://hackney-bookings-api.herokuapp.com/locations?id=" + id)
+    .then(res => {
+      setLocations(res.data)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
 }
+
