@@ -2,15 +2,17 @@ import React, { useState, useEffect } from 'react';
 import SubmitButton from '../SubmitButton/SubmitButton';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import axios from "axios";
 import BookingFormLabel from './BookingFormLabel';
 import BookingFormPicker from './BookingFormPicker';
 import BookingFormInput from './BookingFormInput';
-import axios from "axios";
+import BookingFormSlotPicker from './BookingFormSlotPicker';
 
 export default function BookingForm() {
   const [categories, setCategories] = useState([]);
   const [locations, setLocations] = useState([]);
-  const [startDate, setStartDate] = useState(new Date());
+
+  const [slots, setSlots] = useState([])
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -28,9 +30,7 @@ export default function BookingForm() {
       <BookingFormLabel>Please select a pitch:</BookingFormLabel>
       <BookingFormPicker options={locations} />
       <BookingFormLabel>Select a date:</BookingFormLabel>
-      <div class="govuk-select lbh-select">
-        <DatePicker selected={startDate} onChange={(date: Date) => setStartDate(date)} />
-      </div>
+      <BookingFormSlotPicker slots={slots}/>
       <form onSubmit={handleSubmit} data-testid="booking-form">
         {/* First Name */}
         <BookingFormLabel>Enter your first name:</BookingFormLabel>
@@ -72,6 +72,22 @@ export default function BookingForm() {
     axios.get("https://hackney-bookings-api.herokuapp.com/locations?id=" + id)
     .then(res => {
       setLocations(res.data)
+      getSlots(res.data[0].locationId)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
+
+  function handleLocationChange(location) {
+    const id = location.locationId
+    getSlots(id)
+  }
+
+  function getSlots(locationsId) {
+    axios.get("https://hackney-bookings-api.herokuapp.com/slots?id=" + locationsId)
+    .then(res => {
+      setSlots(res.data)
     })
     .catch(err => {
       console.log(err)

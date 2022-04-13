@@ -17,5 +17,3 @@ export default function BookingFormPicker(props) {
     </select>
   )
 }
-
-// comment
