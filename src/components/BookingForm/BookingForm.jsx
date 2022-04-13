@@ -27,9 +27,9 @@ export default function BookingForm() {
     <div class="govuk-form-group lbh-form-group">
       <BookingFormLabel>Please select a category:</BookingFormLabel>
       <BookingFormPicker options={categories} onChange={handleCategoryChange} />
-      <BookingFormLabel>Please select a pitch:</BookingFormLabel>
-      <BookingFormPicker options={locations} />
-      <BookingFormLabel>Select a date:</BookingFormLabel>
+      <BookingFormLabel>Please select a location:</BookingFormLabel>
+      <BookingFormPicker options={locations} onChange={handleLocationChange} />
+      <BookingFormLabel>Select a time:</BookingFormLabel>
       <BookingFormSlotPicker slots={slots}/>
       <form onSubmit={handleSubmit} data-testid="booking-form">
         {/* First Name */}
