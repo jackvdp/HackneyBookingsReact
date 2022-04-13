@@ -23,7 +23,7 @@ export default function BookingFormSlot(props) {
       <input
         class="govuk-radios__input"
         id="example"
-        name="example"
+        name="slot"
         type="radio"
         value={props.slot.slotId}
       />

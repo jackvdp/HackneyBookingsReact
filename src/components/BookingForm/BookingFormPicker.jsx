@@ -10,7 +10,7 @@ export default function BookingFormPicker(props) {
   }
 
   return(
-    <select class="govuk-select lbh-select" id="select-1" name="select-1" onChange={handleChange}>
+    <select class="govuk-select lbh-select" id="select-1" name="slotPicker" onChange={handleChange}>
       {options.map(o => (
         <option>{o.name}</option>
       ))}

@@ -16,22 +16,22 @@ export default function BookingForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(event.target.fname.value)
+    createBooking(event)
   }
 
   useEffect(() => {
     getCategories()
   }, []);
-  
+
   return (
     <div class="govuk-form-group lbh-form-group">
-      <BookingFormLabel>Please select a category:</BookingFormLabel>
-      <BookingFormPicker options={categories} onChange={handleCategoryChange} />
-      <BookingFormLabel>Please select a location:</BookingFormLabel>
-      <BookingFormPicker options={locations} onChange={handleLocationChange} />
-      <BookingFormLabel>Select a time:</BookingFormLabel>
-      <BookingFormSlotPicker slots={slots}/>
       <form onSubmit={handleSubmit} data-testid="booking-form">
+        <BookingFormLabel>Please select a category:</BookingFormLabel>
+        <BookingFormPicker options={categories} onChange={handleCategoryChange} />
+        <BookingFormLabel>Please select a location:</BookingFormLabel>
+        <BookingFormPicker options={locations} onChange={handleLocationChange} />
+        <BookingFormLabel>Select a time:</BookingFormLabel>
+        <BookingFormSlotPicker slots={slots} />
         {/* First Name */}
         <BookingFormLabel>Enter your first name:</BookingFormLabel>
         <BookingFormInput name="fname" />
@@ -52,7 +52,7 @@ export default function BookingForm() {
     </div>
   )
 
-  function getCategories(){
+  function getCategories() {
     axios.get("https://hackney-bookings-api.herokuapp.com/categories")
       .then(res => {
         setCategories(res.data)
@@ -70,13 +70,13 @@ export default function BookingForm() {
 
   function getLocations(id) {
     axios.get("https://hackney-bookings-api.herokuapp.com/locations?id=" + id)
-    .then(res => {
-      setLocations(res.data)
-      getSlots(res.data[0].locationId)
-    })
-    .catch(err => {
-      console.log(err)
-    })
+      .then(res => {
+        setLocations(res.data)
+        getSlots(res.data[0].locationId)
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
 
   function handleLocationChange(location) {
@@ -86,12 +86,36 @@ export default function BookingForm() {
 
   function getSlots(locationsId) {
     axios.get("https://hackney-bookings-api.herokuapp.com/slots?id=" + locationsId)
-    .then(res => {
-      setSlots(res.data)
-    })
-    .catch(err => {
-      console.log(err)
-    })
+      .then(res => {
+        setSlots(res.data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
+  function createBooking(event) {
+    const slotID = event.target.slot.value
+    const fname = event.target.fname.value
+    const lname = event.target.lname.value
+    const email = event.target.email.value
+    const specreq = event.target.specreq.value
+
+    const body = {
+      "firstName": fname,
+      "lastName": lname,
+      "email": email,
+      "specialReq": specreq,
+      "bookingReference": "123456",
+      "slotId": slotID
+    }
+    axios.post("https://hackney-bookings-api.herokuapp.com/booking", body)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
 }
 

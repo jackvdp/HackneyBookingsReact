@@ -16,15 +16,15 @@ export default function BookingFormSlotPicker(props) {
   return (
     <>
       <div class="govuk-form-group lbh-form-group">
-        <form onChange={handleChange}>
-          <fieldset class="govuk-fieldset" aria-describedby="example-hint">
+        {/* <form onChange={handleChange}> */}
+          <fieldset class="govuk-fieldset" aria-describedby="example-hint" name="slots">
             <div class="govuk-radios lbh-radios">
               {slots.map(slot => (
                 <BookingFormSlot slot={slot} />
               ))}
             </div>
           </fieldset>
-        </form>
+        {/* </form> */}
       </div>
     </>
   )
