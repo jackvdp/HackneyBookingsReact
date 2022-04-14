@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import SubmitButton from '../SubmitButton/SubmitButton';
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import axios from "axios";
-import BookingFormLabel from './BookingFormLabel';
-import BookingFormPicker from './BookingFormPicker';
-import BookingFormInput from './BookingFormInput';
-import BookingFormSlotPicker from './BookingFormSlotPicker';
+import PaymentFormLabel from './PaymentFormLabel';
+import PaymentFormInput from './PaymentFormInput';
+import PaymentRadio from './PaymentRadio';
 import { Link } from "react-router-dom";
+import axios from 'axios';
 
-export default function BookingForm() {
+export default function PaymentForm() {
   const [categories, setCategories] = useState([]);
   const [locations, setLocations] = useState([]);
 
@@ -25,32 +22,21 @@ export default function BookingForm() {
   }, []);
 
   return (
-    <div class="govuk-form-group lbh-form-group">
-      <form data-testid="booking-form">
-        <BookingFormLabel>Please select a category:</BookingFormLabel>
-        <BookingFormPicker options={categories} onChange={handleCategoryChange} />
-        <BookingFormLabel>Please select a location:</BookingFormLabel>
-        <BookingFormPicker options={locations} onChange={handleLocationChange} />
-        <BookingFormLabel>Select a time:</BookingFormLabel>
-        <BookingFormSlotPicker slots={slots} />
-        {/* First Name */}
-        <BookingFormLabel>Enter your first name:</BookingFormLabel>
-        <BookingFormInput name="fname" />
-        {/* Last Name */}
-        <BookingFormLabel>Enter your last name:</BookingFormLabel>
-        <BookingFormInput name="lname" />
-        {/* Email */}
-        <BookingFormLabel>Enter your email:</BookingFormLabel>
-        <BookingFormInput name="email" />
-        {/* Special requirements */}
-        <BookingFormLabel>Enter any special requirements:</BookingFormLabel>
-        <span id="input-with-hint-text-hint" class="govuk-hint lbh-hint">
-          For e.g., any assistance you may require
-        </span>
-        <BookingFormInput name="specreq" />
-        <Link to="/payment"><SubmitButton /></Link>
-      </form>
-    </div>
+    <>
+      <div class="govuk-form-group lbh-form-group">
+        <form onSubmit={handleSubmit} data-testid="booking-form">
+          <PaymentFormLabel>Please select your card type:</PaymentFormLabel>
+          <PaymentRadio />
+          <PaymentFormLabel>Enter your card number:</PaymentFormLabel>
+          <PaymentFormInput name="cardnumber" />
+          <PaymentFormLabel>Enter your CVV:</PaymentFormLabel>
+          <PaymentFormInput name="cvv" />
+          <PaymentFormLabel>Enter the expiry date:</PaymentFormLabel>
+          <PaymentFormInput name="expiry" />
+          <Link to="/success"><SubmitButton /></Link>
+        </form>
+      </div>
+    </>
   )
 
   function getCategories() {

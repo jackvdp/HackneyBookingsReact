@@ -1,4 +1,5 @@
 import AmendForm from "../components/AmendForm/AmendForm";
+import DialogCancel from "../components/DialogCancel/DialogCancel";
 
 export default function Amend() {
   return (
@@ -7,8 +8,10 @@ export default function Amend() {
         <h2>Amend your Booking</h2>
         <AmendForm />
         <button class="govuk-button lbh-button" data-module="govuk-button">
-          Save and continue
+          Change your Booking
         </button>
+        {"      "}
+        <DialogCancel />
       </div>
     </main>
   );
