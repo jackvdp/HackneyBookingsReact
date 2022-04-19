@@ -1,51 +1,70 @@
 import React, { useState, useEffect } from 'react';
-import SubmitButton from '../SubmitButton/SubmitButton';
-import PaymentFormLabel from './PaymentFormLabel';
-import PaymentFormInput from './PaymentFormInput';
+import LHBButton from '../Resuables/LHBButton';
+import FormInput from '../Resuables/FormInput';
+import FormLabel from '../Resuables/FormLabel';
 import PaymentRadio from './PaymentRadio';
-import { Link } from "react-router-dom";
-import axios from 'axios';
-import {
-  useLocation
-} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 export default function PaymentForm(props) {
-  const [categories, setCategories] = useState([]);
-  const [locations, setLocations] = useState([]);
-
-  const [slots, setSlots] = useState([])
 
   const location = useLocation()
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // createBooking(event)
+    createBooking(event)
   }
 
   useEffect(() => {
-    console.log("***** State");
-    console.log(props);
-    console.log(location.state);
-    console.log(location.pathname);
+    
   }, []);
 
   return (
     <>
       <div class="govuk-form-group lbh-form-group">
         <form onSubmit={handleSubmit} data-testid="booking-form">
-          <PaymentFormLabel>Please select your card type:</PaymentFormLabel>
+          <FormLabel>Please select your card type:</FormLabel>
           <PaymentRadio />
-          <PaymentFormLabel>Enter your card number:</PaymentFormLabel>
-          <PaymentFormInput name="cardnumber" />
-          <PaymentFormLabel>Enter your CVV:</PaymentFormLabel>
-          <PaymentFormInput name="cvv" />
-          <PaymentFormLabel>Enter the expiry date:</PaymentFormLabel>
-          <PaymentFormInput name="expiry" />
-          <Link to="/success"><SubmitButton /></Link>
+          <FormLabel>Enter your card number:</FormLabel>
+          <FormInput name="cardnumber" />
+          <FormLabel>Enter your CVC:</FormLabel>
+          <FormInput name="cvc" />
+          <FormLabel>Enter the expiry date:</FormLabel>
+          <FormInput name="expiry" />
+          <LHBButton>Submit</LHBButton>
         </form>
       </div>
     </>
   )
+
+  function createBooking(event) {
+    const cardNumber = event.target.cardnumber.value
+    const cvv = event.target.cvc.value
+    const expiry = event.target.expiry.value
+
+    const bookingInfo = location.state.body
+
+    const body = {
+      "firstName": bookingInfo.firstName,
+      "lastName": bookingInfo.lastName,
+      "email": bookingInfo.email,
+      "specialReq": bookingInfo.specialReq,
+      "bookingReference": bookingInfo.bookingReference,
+      "slotId": bookingInfo.slotId,
+      "payment": {
+        "CardNumber": cardNumber,
+        "CVC": cvv,
+        "ExpiryDate": expiry
+      }
+    }
+
+    console.log("***** Body");
+    console.log(body);
+
+    navigate('/success', { state: { body } })
+        
+  }
 
 }
 

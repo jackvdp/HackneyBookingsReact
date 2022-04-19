@@ -1,5 +1,5 @@
 
-export default function PaymentFormLabel(props) {
+export default function FormLabel(props) {
 
     return(
         <div>

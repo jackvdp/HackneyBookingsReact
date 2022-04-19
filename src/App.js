@@ -1,20 +1,32 @@
-import Accordion from "./components/Accordion/Accordion"
-import Home from "./components/Home/Home"
-import Main from "./components/Main"
-import BookingButton from "./components/BookingButton/BookingButton"
-import AmendButton from "./components/AmendButton/AmendButton"
-import Footer from "./components/Footer/Footer"
-import { Link } from "react-router-dom";
+import React from "react"
+import "./styles/index.scss"
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./routes/Home";
+import Amend from "./routes/Amend";
+import Booking from "./routes/Booking";
+import Payment from "./routes/Payment";
+import Success from "./routes/Success";
+import Main from "./components/Main/Main";
+import Footer from "./components/Main/Footer";
+import AdminLogin from "./routes/AdminLogin";
 
 function App() {
   return (
     <>
-      <Main>
-        <Home />
-        <Link to="/booking"><BookingButton /></Link>
-        <Link to="/amend"><AmendButton /></Link>
-        <Footer />
-      </Main>
+    <Main>
+      <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="booking" element={<Booking />} />
+        <Route path="amend" element={<Amend />} />
+        <Route path="payment" element={<Payment />} />
+        <Route path="success" element={<Success />} />
+        <Route path="admin/login" element={<AdminLogin />} />
+        <Route path="admin/manage-categories" element={<Home />} />
+      </Routes>
+    </BrowserRouter>
+    </Main>
+    <Footer />
     </>
   )
 

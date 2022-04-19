@@ -1,4 +1,4 @@
-function AmendForm() {
+export default function AmendForm() {
   return (
     <div class="govuk-form-group lbh-form-group">
       {/* Reference number */}
@@ -17,5 +17,3 @@ function AmendForm() {
     </div>
   )
 }
-
-export default AmendForm

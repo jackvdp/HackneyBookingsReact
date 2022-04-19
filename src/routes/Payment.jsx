@@ -1,13 +1,7 @@
-import React, { useState } from "react";
-import PaymentForm from "../components/PaymentForm/PaymentForm";
+import PaymentContent from "../components/PaymentForm/PaymentContent"
 
-export default function Booking() {
+export default function Payment() {
   return (
-    <main className="lbh-main-wrapper" id="main-content" role="main">
-      <div className="lbh-container">
-        <h2>Pay for your Booking</h2>
-        <PaymentForm />
-      </div>
-    </main>
-  );
+      <PaymentContent />
+  )
 }

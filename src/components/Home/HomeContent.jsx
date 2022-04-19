@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
+import { Link } from "react-router-dom";
+import LHBButton from "../Resuables/LHBButton";
 
-export default function Home() {
+export default function HomeContent() {
 
   const [category, setCategory] = useState([]);
 
@@ -9,7 +11,6 @@ export default function Home() {
     axios.get("https://hackney-bookings-api.herokuapp.com/categories")
       .then(res => {
         setCategory(res.data)
-        // setName(res.data[0].name)
       })
       .catch(err => {
         console.log(err)
@@ -29,6 +30,8 @@ export default function Home() {
           </div>
         </div>
       ))}
+      <Link to="/booking"><LHBButton >Create a Booking</ LHBButton></Link>
+    <Link to="/amend"><LHBButton >Amend a Booking</ LHBButton></Link>
     </div>
   )
 }

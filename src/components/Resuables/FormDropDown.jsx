@@ -1,4 +1,4 @@
-export default function BookingFormPicker(props) {
+export default function FormDropDown(props) {
 
   const options = props.options
   const onChange = props.onChange

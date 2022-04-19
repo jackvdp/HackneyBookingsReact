@@ -1,4 +1,4 @@
-export default function BookingFormInput(props) {
+export default function FormInput(props) {
 
   const name = props.name
 
