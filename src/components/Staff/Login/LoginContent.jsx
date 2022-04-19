@@ -1,7 +1,7 @@
-import FormInput from "../Resuables/FormInput";
-import FormLabel from "../Resuables/FormLabel";
-import LHBButton from "../Resuables/LHBButton";
-import FormInputPassword from "../Resuables/FormPasswordInput";
+import FormInput from "../../Resuables/FormInput";
+import FormLabel from "../../Resuables/FormLabel";
+import LHBButton from "../../Resuables/LHBButton";
+import FormInputPassword from "../../Resuables/FormPasswordInput";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import ErrorMessage from "./LoginError";

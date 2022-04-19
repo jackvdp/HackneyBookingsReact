@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import LHBButton from '../Resuables/LHBButton';
-import FormInput from '../Resuables/FormInput';
-import FormLabel from '../Resuables/FormLabel';
+import LHBButton from '../../Resuables/LHBButton';
+import FormInput from '../../Resuables/FormInput';
+import FormLabel from '../../Resuables/FormLabel';
 import PaymentRadio from './PaymentRadio';
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";

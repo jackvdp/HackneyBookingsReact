@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
-import BookingFormLabel from '../Resuables/FormLabel';
-import BookingFormPicker from '../Resuables/FormDropDown';
-import BookingFormInput from '../Resuables/FormInput';
+import BookingFormLabel from '../../Resuables/FormLabel';
+import BookingFormPicker from '../../Resuables/FormDropDown';
+import BookingFormInput from '../../Resuables/FormInput';
 import BookingFormSlotPicker from './BookingFormSlotPicker';
 import { useNavigate } from "react-router-dom";
-import LHBButton from '../Resuables/LHBButton';
+import LHBButton from '../../Resuables/LHBButton';
 
 export default function BookingContent() {
 

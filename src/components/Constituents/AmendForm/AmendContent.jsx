@@ -1,5 +1,5 @@
 import AmendForm from "./AmendForm";
-import DialogCancel from "../DialogCancel/DialogCancel";
+import DialogCancel from "../../Resuables/DialogCancel/DialogCancel";
 
 export default function AmendContent() {
   return (
