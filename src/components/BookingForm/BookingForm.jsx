@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import SubmitButton from '../SubmitButton/SubmitButton';
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import BookingFormLabel from './BookingFormLabel';
 import BookingFormPicker from './BookingFormPicker';
 import BookingFormInput from './BookingFormInput';
 import BookingFormSlotPicker from './BookingFormSlotPicker';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function BookingForm() {
   const [categories, setCategories] = useState([]);
@@ -19,6 +18,8 @@ export default function BookingForm() {
     event.preventDefault();
     createBooking(event)
   }
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     getCategories()
@@ -48,7 +49,7 @@ export default function BookingForm() {
           For e.g., any assistance you may require
         </span>
         <BookingFormInput name="specreq" />
-        <Link to="/payment"><SubmitButton /></Link>
+        <SubmitButton />
       </form>
     </div>
   )
@@ -111,16 +112,17 @@ export default function BookingForm() {
       "slotId": slotID
     }
 
-    console.log("Body of POST");
-    console.log(body);
+    navigate('/payment', { state: { body } })
 
-    axios.post("https://hackney-bookings-api.herokuapp.com/booking", body)
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => {
-        console.log(err)
-      })
+    // axios.post("https://hackney-bookings-api.herokuapp.com/booking", body)
+    //   .then(res => {
+    //     console.log(res);
+    //   })
+    //   .catch(err => {
+    //     console.log(err)
+    //   })
   }
+
+
 }
 

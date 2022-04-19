@@ -5,7 +5,7 @@ import { render } from "react-dom";
 import {
   BrowserRouter,
   Routes,
-  Route,
+  Route
 } from "react-router-dom";
 import App from "./App"
 import Amend from "./routes/Amend";
@@ -16,7 +16,7 @@ import Success from "./routes/Success";
 const rootElement = document.getElementById("root");
 render(
   <BrowserRouter>
-      <Routes>
+    <Routes>
       <Route path="/" element={<App />} />
       <Route path="booking" element={<Booking />} />
       <Route path="amend" element={<Amend />} />

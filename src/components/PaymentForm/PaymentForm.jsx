@@ -5,20 +5,28 @@ import PaymentFormInput from './PaymentFormInput';
 import PaymentRadio from './PaymentRadio';
 import { Link } from "react-router-dom";
 import axios from 'axios';
+import {
+  useLocation
+} from "react-router-dom";
 
-export default function PaymentForm() {
+export default function PaymentForm(props) {
   const [categories, setCategories] = useState([]);
   const [locations, setLocations] = useState([]);
 
   const [slots, setSlots] = useState([])
 
+  const location = useLocation()
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    createBooking(event)
+    // createBooking(event)
   }
 
   useEffect(() => {
-    getCategories()
+    console.log("***** State");
+    console.log(props);
+    console.log(location.state);
+    console.log(location.pathname);
   }, []);
 
   return (
@@ -39,74 +47,5 @@ export default function PaymentForm() {
     </>
   )
 
-  function getCategories() {
-    axios.get("https://hackney-bookings-api.herokuapp.com/categories")
-      .then(res => {
-        setCategories(res.data)
-        getLocations(res.data[0].categoryId)
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  }
-
-  function handleCategoryChange(category) {
-    const id = category.categoryId
-    getLocations(id)
-  }
-
-  function getLocations(id) {
-    axios.get("https://hackney-bookings-api.herokuapp.com/locations?id=" + id)
-      .then(res => {
-        setLocations(res.data)
-        getSlots(res.data[0].locationId)
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  }
-
-  function handleLocationChange(location) {
-    const id = location.locationId
-    getSlots(id)
-  }
-
-  function getSlots(locationsId) {
-    axios.get("https://hackney-bookings-api.herokuapp.com/slots?id=" + locationsId)
-      .then(res => {
-        setSlots(res.data)
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  }
-
-  function createBooking(event) {
-    const slotID = event.target.slot.value
-    const fname = event.target.fname.value
-    const lname = event.target.lname.value
-    const email = event.target.email.value
-    const specreq = event.target.specreq.value
-
-    const body = {
-      "firstName": fname,
-      "lastName": lname,
-      "email": email,
-      "specialReq": specreq,
-      "bookingReference": "123456",
-      "slotId": slotID
-    }
-
-    console.log("Body of POST");
-    console.log(body);
-
-    axios.post("https://hackney-bookings-api.herokuapp.com/booking", body)
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  }
 }
 
