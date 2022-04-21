@@ -118,12 +118,6 @@ export default function BookingContent() {
   
       navigate('/payment', { state: { body } })
   
-      // axios.post("https://hackney-bookings-api.herokuapp.com/booking", body)
-      //   .then(res => {
-      //     console.log(res);
-      //   })
-      //   .catch(err => {
-      //     console.log(err)
-      //   })
+
     }
 }

@@ -5,6 +5,7 @@ import FormLabel from '../../Resuables/FormLabel';
 import PaymentRadio from './PaymentRadio';
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import axios from "axios";
 
 export default function PaymentForm(props) {
 
@@ -50,20 +51,29 @@ export default function PaymentForm(props) {
       "lastName": bookingInfo.lastName,
       "email": bookingInfo.email,
       "specialReq": bookingInfo.specialReq,
-      "bookingReference": bookingInfo.bookingReference,
       "slotId": bookingInfo.slotId,
-      "payment": {
-        "CardNumber": cardNumber,
-        "CVC": cvv,
-        "ExpiryDate": expiry
-      }
+      "cardholderName": bookingInfo.firstName + " " + bookingInfo.lastName,
+      "cardType": "Visa",
+      "cardNumber": cardNumber,
+      "billingAddress": "Demo address",
+      "cvc": cvv,
+      "expiryDate": expiry
     }
 
-    console.log("***** Body");
-    console.log(body);
-
-    navigate('/success', { state: { body } })
-        
+    if (!expiry.includes("/")) {
+      navigate('/fail', { state: { } })
+    } else {
+      axios.post("https://hackney-bookings-api.herokuapp.com/bookings", body)
+      .then(res => {
+        console.log(res.data);
+        console.log(res.data.bookingReference)
+        const booking = res.data
+        navigate('/success', { state: { booking } })
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    }
   }
 
 }
