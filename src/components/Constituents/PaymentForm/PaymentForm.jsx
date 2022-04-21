@@ -5,6 +5,7 @@ import FormLabel from '../../Resuables/FormLabel';
 import PaymentRadio from './PaymentRadio';
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import PaymentAmountLabel from './PaymentAmount';
 import axios from "axios";
 
 export default function PaymentForm(props) {
@@ -24,6 +25,7 @@ export default function PaymentForm(props) {
   return (
     <>
       <div class="govuk-form-group lbh-form-group">
+        <PaymentAmountLabel />
         <form onSubmit={handleSubmit} data-testid="booking-form">
           <FormLabel>Please select your card type:</FormLabel>
           <PaymentRadio />
@@ -33,7 +35,7 @@ export default function PaymentForm(props) {
           <FormInput name="cvc" />
           <FormLabel>Enter the expiry date:</FormLabel>
           <FormInput name="expiry" />
-          <LHBButton>Submit</LHBButton>
+          <LHBButton>Pay</LHBButton>
         </form>
       </div>
     </>
